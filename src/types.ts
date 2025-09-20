@@ -8,6 +8,9 @@ export type Maybe<T> = T | undefined | null;
 
 export type StateSetter<S> = React.Dispatch<React.SetStateAction<S>>;
 
+export type FixedType = 'left' | 'right' | boolean
+
+
 export interface Column<TRow, TSummaryRow = unknown> {
   /** The name of the column. Displayed in the header cell by default */
   readonly name: string | ReactElement;
@@ -49,6 +52,7 @@ export interface Column<TRow, TSummaryRow = unknown> {
   /** Determines whether column is frozen */
   // readonly frozen?: Maybe<boolean>;
   readonly frozen?: 'left' | 'right' | boolean;
+//  frozen?: FixedType;
   /** Enable resizing of the column */
   readonly resizable?: Maybe<boolean>;
   /** Enable sorting of the column */

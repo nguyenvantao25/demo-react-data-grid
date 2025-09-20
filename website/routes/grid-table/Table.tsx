@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { css } from '@linaria/core';
 import { DataGrid } from '../../../src';
+import { convertToTanStackColumns } from './hook/utils';
 
 // import { DataGrid } from '../../../src';
 
@@ -12,14 +13,14 @@ const transitionClassname = css`
 
 
 
-interface Props {
+interface Props<T = AnyObject> {
   rowHeight?: number
   columns: any[]
   dataSource: any[]
   direction?: any
 }
 
-const TableGrid = (props: Props) => {
+const TableGrid = <RecordType extends object>(props: Props<RecordType>) => {
 
   const {
     columns,
@@ -34,8 +35,22 @@ const TableGrid = (props: Props) => {
   const [selectedRows, setSelectedRows] = useState((): ReadonlySet<string> => new Set());
 
 
+    const mergedColumns = React.useMemo(() => {
+    return convertToTanStackColumns<RecordType>({
+      t,
+      columns,
+      format,
+      editAble
+    })
+
+    // return convertToTanStackColumns<RecordType>(columns)
+  }, [t, columns, format, editAble])
+
+
+
+
   return (
-    <div>
+    <>
 
       {/* <div className='top-toolbar' /> */}
 
@@ -62,7 +77,7 @@ const TableGrid = (props: Props) => {
 
         }}
 
-        style={{ height: '100%', maxHeight: '100%' }}
+        // style={{ height: '100%', maxHeight: '100%' }}
       />
 
       {/* <div className='top-toolbar' /> */}
@@ -70,7 +85,7 @@ const TableGrid = (props: Props) => {
 
 
 
-    </div>
+    </>
   );
 }
 

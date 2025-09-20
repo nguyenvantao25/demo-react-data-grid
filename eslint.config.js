@@ -505,7 +505,7 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-enum-comparison': 1,
       '@typescript-eslint/no-unsafe-function-type': 1,
       '@typescript-eslint/no-unsafe-member-access': 0,
-      '@typescript-eslint/no-unsafe-return': 1,
+      // '@typescript-eslint/no-unsafe-return': 1,
       '@typescript-eslint/no-unsafe-type-assertion': 0,
       '@typescript-eslint/no-unsafe-unary-minus': 1,
       '@typescript-eslint/no-useless-empty-export': 1,

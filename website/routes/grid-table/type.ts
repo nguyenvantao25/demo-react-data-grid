@@ -203,7 +203,7 @@ export type ColumnTemplate<RecordType> = {
 }
 
 export type ColumnTable<RecordType = AnyObject> = {
-  field?: string
+  field: string
   // key?: any,
 
   width?: number
@@ -278,7 +278,7 @@ export type ColumnTable<RecordType = AnyObject> = {
    * @since 1.7.25
    */
   fixedType?: FixedType
-  fixed?: FixedType
+ fixed?: FixedType
  /**
    * @deprecated Please use `wrapSettings` instead.
    * @since 1.7.34
