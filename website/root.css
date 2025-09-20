@@ -1,0 +1,31 @@
+:root,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  &:has([value='light']:checked) {
+    --rdg-color-scheme: light;
+  }
+
+  &:has([value='dark']:checked) {
+    --rdg-color-scheme: dark;
+  }
+}
+
+body {
+  color-scheme: var(--rdg-color-scheme, light dark);
+  background-color: light-dark(#fff, hsl(0deg 0% 10%));
+  color: light-dark(#111, #fff);
+}
+
+#root {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.fill-grid {
+  block-size: 100%;
+}
