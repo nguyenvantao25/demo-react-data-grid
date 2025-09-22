@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { getColSpan, getRowStyle } from './utils';
 import type { RenderRowProps } from './types';
-import { cell, cellFrozen } from './style/cell';
+import { cell, cellFrozenLeft } from './style/cell';
 import {
   bottomSummaryRowClassname,
   rowClassname,
@@ -42,7 +42,7 @@ const topSummaryRow = css`
       z-index: 2;
     }
 
-    > .${cellFrozen} {
+    > .${cellFrozenLeft} {
       z-index: 3;
     }
   }

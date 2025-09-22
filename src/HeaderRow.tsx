@@ -6,7 +6,7 @@ import { getColSpan } from './utils';
 import type { CalculatedColumn, Direction, Maybe, Position, ResizedWidth } from './types';
 import type { DataGridProps } from './DataGrid';
 import HeaderCell from './HeaderCell';
-import { cell, cellFrozen } from './style/cell';
+import { cell, cellFrozenLeft } from './style/cell';
 import { rowSelectedClassname } from './style/row';
 
 type SharedDataGridProps<R, SR, K extends React.Key> = Pick<
@@ -39,7 +39,7 @@ const headerRow = css`
       position: sticky;
     }
 
-    & > .${cellFrozen} {
+    & > .${cellFrozenLeft} {
       z-index: 3;
     }
   }

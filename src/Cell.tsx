@@ -1,5 +1,6 @@
 import { memo, type MouseEvent } from 'react';
 import { css } from '@linaria/core';
+import classNames from "classnames"
 
 import { useRovingTabIndex } from './hooks';
 import { createCellEvent, getCellClassname, getCellStyle, isCellEditableUtil } from './utils';
@@ -32,9 +33,14 @@ function Cell<R, SR>({
   onRowChange,
   selectCell,
   style,
+
+  prefix='rc',
+  wrapSettings,
   ...props
 }: CellRendererProps<R, SR>) {
   const { tabIndex, childTabIndex, onFocus } = useRovingTabIndex(isCellSelected);
+
+  console.log('wrapSettings', wrapSettings)
 
   const { cellClass } = column;
   className = getCellClassname(
@@ -94,6 +100,8 @@ function Cell<R, SR>({
     onRowChange(column, newRow);
   }
 
+  // console.log('className', className)
+
   return (
     <div
       role="gridcell"
@@ -102,7 +110,16 @@ function Cell<R, SR>({
       aria-selected={isCellSelected}
       aria-readonly={!isEditable || undefined}
       tabIndex={tabIndex}
-      className={className}
+      className={classNames(className, {
+         [`${prefix}-grid-cell-ellipsis`]: !wrapSettings || !(wrapSettings && (wrapSettings.wrapMode === 'Both' || wrapSettings.wrapMode === 'Content')),
+        [`${prefix}-grid-cell-wrap`]: wrapSettings && (wrapSettings.wrapMode === 'Both' || wrapSettings.wrapMode === 'Content'),
+
+        // [`${prefix}-grid-cell-fix-left-last`]: isLastLeftPinnedColumn,
+        // [`${prefix}-grid-cell-fix-right-first`]: isFirstRightPinnedColumn,
+
+        [`${prefix}-grid-cell-text-center`]: column?.textAlign === 'center',
+        [`${prefix}-grid-cell-text-right`]: column?.textAlign === 'right' || column.type === 'number',
+      })}
       style={{
         ...getCellStyle(column, colSpan),
         ...style
@@ -114,14 +131,36 @@ function Cell<R, SR>({
       onFocus={onFocus}
       {...props}
     >
-      {column.renderCell({
+
+      {column.frozen === undefined || column.frozen === false ? (
+        column.renderCell({
+          column,
+          row,
+          rowIdx,
+          isCellEditable: isEditable,
+          tabIndex: childTabIndex,
+          onRowChange: handleRowChange
+        })
+      ) : (
+        <div className='cell-content'>{column.renderCell({
+          column,
+          row,
+          rowIdx,
+          isCellEditable: isEditable,
+          tabIndex: childTabIndex,
+          onRowChange: handleRowChange
+        })}</div>
+      )}
+
+      {/* {column.renderCell({
         column,
         row,
         rowIdx,
         isCellEditable: isEditable,
         tabIndex: childTabIndex,
         onRowChange: handleRowChange
-      })}
+      })} */}
+
     </div>
   );
 }

@@ -27,8 +27,10 @@ function Row<R, SR>({
   onRowChange,
   selectCell,
   style,
+  wrapSettings,
   ...props
 }: RenderRowProps<R, SR>) {
+
   const renderCell = useDefaultRenderers<R, SR>()!.renderCell!;
 
   const handleRowChange = useLatestFunc((column: CalculatedColumn<R, SR>, newRow: R) => {
@@ -73,7 +75,9 @@ function Row<R, SR>({
           onCellDoubleClick,
           onCellContextMenu,
           onRowChange: handleRowChange,
-          selectCell
+          selectCell,
+          wrapSettings
+          
         })
       );
     }

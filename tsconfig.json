@@ -1,5 +1,10 @@
 {
   "include": [],
+  "compilerOptions": {
+    "plugins": [
+      { "name": "typescript-styled-plugin", "disable": true }
+    ]
+  },
   "references": [
     { "path": "tsconfig.js.json" },
     { "path": "tsconfig.src.json" },

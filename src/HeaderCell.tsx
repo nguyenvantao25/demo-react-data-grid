@@ -312,6 +312,7 @@ export default function HeaderCell<R, SR>({
         {...dragTargetProps}
         {...dropTargetProps}
       >
+        
         {content}
 
         {resizable && (

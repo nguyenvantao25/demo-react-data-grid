@@ -10,6 +10,33 @@ export type StateSetter<S> = React.Dispatch<React.SetStateAction<S>>;
 
 export type FixedType = 'left' | 'right' | boolean
 
+export type ITextAlign = 'center' | 'left' | 'right'
+
+export type IWrapMode = 'Header' | 'Both' | 'Content'
+
+
+export type IWrapSettings = {
+  wrapMode?: IWrapMode
+}
+
+
+export type IColumnType =
+  | 'number'
+  | 'time'
+  | 'date'
+  | 'week'
+  | 'month'
+  | 'file'
+  | 'quarter'
+  | 'year'
+  | 'datetime'
+  | 'string'
+  | 'boolean'
+  | 'checkbox'
+  | 'color'
+  | null
+  | undefined
+
 
 export interface Column<TRow, TSummaryRow = unknown> {
   /** The name of the column. Displayed in the header cell by default */
@@ -52,7 +79,7 @@ export interface Column<TRow, TSummaryRow = unknown> {
   /** Determines whether column is frozen */
   // readonly frozen?: Maybe<boolean>;
   readonly frozen?: 'left' | 'right' | boolean;
-//  frozen?: FixedType;
+  //  frozen?: FixedType;
   /** Enable resizing of the column */
   readonly resizable?: Maybe<boolean>;
   /** Enable sorting of the column */
@@ -81,6 +108,11 @@ export interface Column<TRow, TSummaryRow = unknown> {
      */
     readonly closeOnExternalRowChange?: Maybe<boolean>;
   }>;
+
+  type?: IColumnType
+  textAlign?: ITextAlign
+
+
 }
 
 export interface CalculatedColumn<TRow, TSummaryRow = unknown> extends Column<TRow, TSummaryRow> {
@@ -168,10 +200,10 @@ export interface RenderHeaderCellProps<TRow, TSummaryRow = unknown> {
 
 interface BaseCellRendererProps<TRow, TSummaryRow = unknown>
   extends Omit<React.ComponentProps<'div'>, 'children'>,
-    Pick<
-      DataGridProps<TRow, TSummaryRow>,
-      'onCellMouseDown' | 'onCellClick' | 'onCellDoubleClick' | 'onCellContextMenu'
-    > {
+  Pick<
+    DataGridProps<TRow, TSummaryRow>,
+    'onCellMouseDown' | 'onCellClick' | 'onCellDoubleClick' | 'onCellContextMenu'
+  > {
   rowIdx: number;
   selectCell: (position: Position, options?: SelectCellOptions) => void;
 }
@@ -184,6 +216,8 @@ export interface CellRendererProps<TRow, TSummaryRow>
   isDraggedOver: boolean;
   isCellSelected: boolean;
   onRowChange: (column: CalculatedColumn<TRow, TSummaryRow>, newRow: TRow) => void;
+
+  wrapSettings: IWrapSettings | undefined
 }
 
 export type CellEvent<E extends React.SyntheticEvent<HTMLDivElement>> = E & {
@@ -253,6 +287,7 @@ export interface RenderRowProps<TRow, TSummaryRow = unknown>
   selectedCellEditor: ReactElement<RenderEditCellProps<TRow>> | undefined;
   onRowChange: (column: CalculatedColumn<TRow, TSummaryRow>, rowIdx: number, newRow: TRow) => void;
   rowClass: Maybe<(row: TRow, rowIdx: number) => Maybe<string>>;
+  wrapSettings: IWrapSettings | undefined
 }
 
 export interface RowsChangeData<R, SR = unknown> {
@@ -321,7 +356,7 @@ export interface RenderSortPriorityProps {
   priority: number | undefined;
 }
 
-export interface RenderSortStatusProps extends RenderSortIconProps, RenderSortPriorityProps {}
+export interface RenderSortStatusProps extends RenderSortIconProps, RenderSortPriorityProps { }
 
 export interface RenderCheckboxProps
   extends Pick<
@@ -337,7 +372,7 @@ export interface Renderers<TRow, TSummaryRow> {
   renderCheckbox?: Maybe<(props: RenderCheckboxProps) => ReactNode>;
   renderRow?: Maybe<(key: Key, props: RenderRowProps<TRow, TSummaryRow>) => ReactNode>;
   renderSortStatus?: Maybe<(props: RenderSortStatusProps) => ReactNode>;
-  noRowsFallback?: Maybe<ReactNode>;
+  noRowsFallback?: Maybe<ReactNode>
 }
 
 export interface SelectCellOptions {

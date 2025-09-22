@@ -475,6 +475,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: unknown
       parentRoute: typeof rootRouteImport
     }
+    '/grid-table/hook/constant': {
+      id: '/grid-table/hook/constant'
+      path: ''
+      fullPath: '/grid-table/hook/constant'
+      preLoaderRoute: unknown
+      parentRoute: typeof rootRouteImport
+    }
     '/grid-table/hook/utils': {
       id: '/grid-table/hook/utils'
       path: ''
@@ -699,6 +706,15 @@ declare module './routes/grid-table/type' {
     FileRoutesByPath['/grid-table/type']['id'],
     FileRoutesByPath['/grid-table/type']['path'],
     FileRoutesByPath['/grid-table/type']['fullPath']
+  >
+}
+declare module './routes/grid-table/hook/constant' {
+  const createFileRoute: CreateFileRoute<
+    '/grid-table/hook/constant',
+    FileRoutesByPath['/grid-table/hook/constant']['parentRoute'],
+    FileRoutesByPath['/grid-table/hook/constant']['id'],
+    FileRoutesByPath['/grid-table/hook/constant']['path'],
+    FileRoutesByPath['/grid-table/hook/constant']['fullPath']
   >
 }
 declare module './routes/grid-table/hook/utils' {

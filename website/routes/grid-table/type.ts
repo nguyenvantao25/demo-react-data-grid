@@ -1,21 +1,15 @@
 import type { CheckboxProps, TablePaginationConfig } from 'rc-master-ui'
 import type { ItemType } from 'rc-master-ui/es/menu/interface'
 
-import type { OnChangeFn } from '@tanstack/react-table'
 import type { ReactElement, ReactNode } from 'react'
-import type { IOperator } from './hook/constant'
-import type { ColorPickerProps } from 'antd'
+// import type { IOperator } from './hook/constant'
+// import type { ColorPickerProps } from 'antd'
 import type { TableLocale } from "rc-master-ui/lib/table/interface";
+import type { IOperator } from './hook/constant';
 
 // export type FilterOperator = 'contains' | 'equals' | 'startsWith' | 'endsWith'
 
-declare module "@tanstack/table-core" {
-  // @ts-expect-error
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<any, any> extends ColumnTable {
-    rowSpan?: number;
-  }
-}
+
 
 export type ExtendedColumnFilter = {
   id: string
@@ -738,7 +732,7 @@ export type ContextInfo<RecordType> = {
 }
 
 
-export type Presets = Required<ColorPickerProps>['presets'][number];
+export type Presets = Required<any>['presets'][number];
 
 
 export type RangeState = {

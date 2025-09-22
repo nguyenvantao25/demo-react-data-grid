@@ -53,6 +53,7 @@ import type {
   ColumnWidths,
   Direction,
   FillEvent,
+  IWrapSettings,
   Maybe,
   Position,
   Renderers,
@@ -237,6 +238,9 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   direction?: Maybe<Direction>;
   'data-testid'?: Maybe<string>;
   'data-cy'?: Maybe<string>;
+
+
+  wrapSettings?: IWrapSettings
 }
 
 /**
@@ -299,7 +303,9 @@ export function DataGrid<R, SR = unknown, K extends Key = Key>(props: DataGridPr
     'aria-describedby': ariaDescribedBy,
     'aria-rowcount': rawAriaRowCount,
     'data-testid': testId,
-    'data-cy': dataCy
+    'data-cy': dataCy,
+
+    wrapSettings
   } = props;
 
   /**
@@ -1145,7 +1151,8 @@ export function DataGrid<R, SR = unknown, K extends Key = Key>(props: DataGridPr
           lastFrozenColumnIndex,
           onRowChange: handleFormatterRowChangeLatest,
           selectCell: selectCellLatest,
-          selectedCellEditor: getCellEditor(rowIdx)
+          selectedCellEditor: getCellEditor(rowIdx),
+          wrapSettings
         })
       );
     }
@@ -1164,6 +1171,7 @@ export function DataGrid<R, SR = unknown, K extends Key = Key>(props: DataGridPr
     setColumnWidthsInternal(columnWidthsRaw);
   }
 
+  // let templateRows = `repeat(${headerRowsCount}, ${headerRowHeight}px)`;
   let templateRows = `repeat(${headerRowsCount}, ${headerRowHeight}px)`;
   if (topSummaryRowsCount > 0) {
     templateRows += ` repeat(${topSummaryRowsCount}, ${summaryRowHeight}px)`;
@@ -1215,6 +1223,7 @@ export function DataGrid<R, SR = unknown, K extends Key = Key>(props: DataGridPr
         gridTemplateRows: templateRows,
         '--rdg-header-row-height': `${headerRowHeight}px`,
         '--rdg-scroll-height': `${scrollHeight}px`,
+        outline: 'none',
         ...layoutCssVars
       }}
       dir={direction}

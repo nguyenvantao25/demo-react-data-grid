@@ -22,6 +22,7 @@ export function useViewportRows<R>({
       return {
         totalRowHeight: rowHeight * rows.length,
         gridTemplateRows: ` repeat(${rows.length}, ${rowHeight}px)`,
+        // gridTemplateRows: ` repeat(${rows.length}, auto)`,
         getRowTop: (rowIdx: number) => rowIdx * rowHeight,
         getRowHeight: () => rowHeight,
         findRowIdx: (offset: number) => floor(offset / rowHeight)

@@ -18,21 +18,36 @@ export const cell = css`
     /* background-color: inherit; */
     background-color: #ffffff;
 
-    white-space: nowrap;
+    /* white-space: nowrap; */
     /* overflow: clip; */
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     outline: none;
+  
 
     &[aria-selected='true'] {
       outline: var(--rdg-selection-width) solid var(--rdg-selection-color);
       outline-offset: calc(var(--rdg-selection-width) * -1);
     }
+
+    &.rc-grid-cell-wrap {
+      white-space: normal;
+      word-break: break-all;
+      overflow: hidden;
+    }
+    &.rc-grid-cell-ellipsis {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+
   }
 `;
 
 export const cellClassname = `rdg-cell ${cell}`;
 
-export const cellFrozen = css`
+export const cellFrozenLeft = css`
   @layer rdg.Cell {
     position: sticky;
     /* Should have a higher value than 0 to show up above unfrozen cells */
@@ -42,6 +57,28 @@ export const cellFrozen = css`
     &:nth-last-child(1 of &) {
       box-shadow: var(--rdg-cell-frozen-box-shadow);
     }
+
+    &.rc-grid-cell-wrap {
+      overflow: unset;
+      .cell-content {
+         white-space: normal;
+         word-break: break-all;
+         overflow: hidden;
+      }
+    }
+
+
+     &.rc-grid-cell-ellipsis {
+      overflow: unset;
+      .cell-content {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        overflow: hidden;
+      }
+    }
+
+    
   }
 `;
 
@@ -74,13 +111,32 @@ export const cellFrozenRight = css`
             border-inline-start: 1px solid #e0e0e0;
           }
     }
+
+     &.rc-grid-cell-wrap {
+      overflow: unset;
+      .cell-content {
+         white-space: normal;
+         word-break: break-all;
+         overflow: hidden;
+      }
+    }
+
+
+     &.rc-grid-cell-ellipsis {
+      overflow: unset;
+      .cell-content {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        overflow: hidden;
+      }
+    }
   }
 `;
 
 
-export const cellFrozenClassname = `rdg-cell-frozen ${cellFrozen}`;
-export const cellFrozenRightClassname = `rdg-cell-frozen-right ${cellFrozenRight}`;
-// export const cellFrozenRightClassname = ``;
+export const cellFrozenClassname = `rdg-cell-frozen rdg-cell-frozen-left ${cellFrozenLeft}`;
+export const cellFrozenRightClassname = `rdg-cell-frozen rdg-cell-frozen-right ${cellFrozenRight}`;
 
 const cellDragHandle = css`
   @layer rdg.DragHandle {
