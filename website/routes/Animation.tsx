@@ -1,5 +1,4 @@
 
-import Test from './Test';
 
 export const Route = createFileRoute({
   component: Animation
@@ -13,7 +12,7 @@ function Animation() {
     <>
       
 
-      <Test />
+      <p>Animation</p>  
 
     </>
   );
