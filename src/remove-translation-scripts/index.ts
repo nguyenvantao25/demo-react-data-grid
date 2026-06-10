@@ -8,8 +8,9 @@ import { findAndReplaceInFiles } from './findAndReplaceInFiles'
 import {
   updateLayoutFile,
   updateDashboardLayoutFile,
-  updateGuestLayoutFile,
-  updateBlankLayoutFile,
+
+  // updateGuestLayoutFile,
+  // updateBlankLayoutFile,
   updateFrontLayoutFile
 } from './updateLayoutFiles'
 import { removeFilesAndFolders } from './removeFilesAndFolders'
@@ -46,9 +47,9 @@ async function main() {
 
   await updateDashboardLayoutFile()
 
-  await updateGuestLayoutFile()
+  // await updateGuestLayoutFile()
 
-  await updateBlankLayoutFile()
+  // await updateBlankLayoutFile()
 
   await updateFrontLayoutFile()
 

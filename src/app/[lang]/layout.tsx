@@ -34,8 +34,8 @@ export const metadata = {
     'Vuexy - MUI Next.js Admin Dashboard Template - is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.'
 }
 
-const RootLayout = async (props: ChildrenType & { params: Promise<{ lang: Locale }> }) => {
-  const params = await props.params
+const RootLayout = async (props: ChildrenType & { params:any}) => {
+  const params: {lang: Locale} = await props.params
 
   const { children } = props
 
